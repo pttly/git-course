@@ -1,16 +1,18 @@
 ## [1] Giải thích các câu lệnh: 
 
 git commit --amend 
-dùng để chỉnh sửa message commit bằng cách đi vào màn hình insert và chỉnh sửa
+dùng để chỉnh sửa message cho commit gần nhất
+bằng cách đi vào màn hình insert và chỉnh sửa
 
 git commit --amend -m”<message>” 
-snapshot way để chỉnh sửa message commit trực tiếp không cần đi vào màn hình insert
+snapshot way để chỉnh sửa message cho commit gần nhất
+chỉnh trực tiếp không cần đi vào màn hình insert
 
 git restore --staged <file>
-để đưa các thay đỏi từ vùng staging về vùng working dir
+để đưa các thay đổi từ vùng staging về vùng working dir
 
 git reset HEAD~1
-dùng để đưa các thay đổi từ repository về worrking area
+dùng để đưa các thay đổi từ repository về working area
 HEAD~1 nghĩa là quay về một commit trước đó
 bản chất undo commit là xóa các commit, nếu tiếp tục git add hoặc git commit, GIT sẽ so sánh 
 sự khác nhau giữa các mình để tiếp tục đẩy sự thay đổi chưa được ghi nhận lên vùng phù hợp
