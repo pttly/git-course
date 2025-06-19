@@ -1,0 +1,106 @@
+## [1] Giải thích các câu lệnh: 
+
+git commit --amend 
+dùng để chỉnh sửa message commit bằng cách đi vào màn hình insert và chỉnh sửa
+
+git commit --amend -m”<message>” 
+snapshot way để chỉnh sửa message commit trực tiếp không cần đi vào màn hình insert
+
+git restore --staged <file>
+để đưa các thay đỏi từ vùng staging về vùng working dir
+
+git reset HEAD~1
+dùng để đưa các thay đổi từ repository về worrking area
+HEAD~1 nghĩa là quay về một commit trước đó
+bản chất undo commit là xóa các commit, nếu tiếp tục git add hoặc git commit, GIT sẽ so sánh 
+sự khác nhau giữa các mình để tiếp tục đẩy sự thay đổi chưa được ghi nhận lên vùng phù hợp
+
+----------------------------------
+## [2] Hãy tưởng tượng có 1 folder lesson-3 mới được tạo. Hãy liệt kê các file theo từng
+vùng, liệt kê các commit và message tương ứng sau khi thao tác một loạt các lệnh sau
+
+a. Tạo 3 file: file1, file2, file3
+GIT chưa quản lý folder/files của lesson-3 
+Cả 3 vùng đang trống
+
+b. Chạy lệnh: git init
+GIT bắt đầu quản lý folder/files của lesson-3 
+Working dir : file1, file2, file3
+Staging : 
+Repository : 
+
+c. Chạy lệnh: git commit -m”init project”
+Chưa có file nào ở staging, nên không có gì commit lên repository
+Working dir : file1, file2, file3
+Staging : 
+Repository : 
+
+d. Chạy lệnh: git add file1
+So sánh giữa working dir và repository, thấy chưa có file1 nên tiến hành snapshot file1 vào vùng staging
+Working dir : file1, file2, file3
+Staging : file1
+Repository : 
+
+e. Chạy lệnh: git commit -m”add file”
+Đưa file1 từ staging lên repository
+Working dir : file1, file2, file3
+Staging : 
+Repository : file1
+
+f. Chạy lệnh: git add . 
+So sánh giữa working dir và repository, thấy chưa có file2, file3 nên snapshot hai file này vào staging
+Working dir : file1, file2, file3
+Staging : file2, file3
+Repository : file1
+
+g. Chạy lệnh: git restore --staged file2
+Tìm trong vùng staging, thấy có file2 và đưa nó về ghi đè lên phiên bản file1 ở working dir. 
+staging không còn chứa file2 nữa.  
+Working dir : file1, file2, file3
+Staging : file3
+Repository : file1
+
+h. Chạy lệnh: git commit -m”add all files”
+Đưa tất cả file đang có trong vùng staging lên repository
+Do ở staging đã chứa các thay đổi sau bước git add nên khi tiếp tục git commit đã đảm bảo commit lên các thay đổi mới nhất
+Working dir : file1, file2, file3
+Staging : 
+Repository : file1, file3
+
+i. Chạy lệnh: git reset HEAD~1
+Check lịch sử commit và lùi về trạng thái của repository ở 1 commit trước đó
+Một commit trước đó nằm ở mục h. nghĩa là tiến hành đưa phiên bản file3 ở repository ghi đè lên file3 ở working dir
+Xóa file3 ở repository
+Working dir : file1, file2, file3
+Staging : 
+Repository : file1
+
+----------------------------------
+## [3] Hãy tưởng tượng có 1 folder lesson-3-git mới được tạo ra. Hãy liệt kê các file theo từng vùng sau khi thao tác các lệnh sau:
+a. Chạy lệnh git init
+Working dir : 
+Staging : 
+Repository : 
+
+b. Tạo file file1.txt, file2.txt, oops/file3.txt.
+Working dir : file1.txt, file2.txt, oops/file3.txt
+Staging : 
+Repository : 
+
+c. Thêm file .gitignore, thêm vào 2 dòng:
+i. file1.txt
+ii. oops/
+
+Working dir : file2.txt
+Staging : 
+Repository : 
+
+d. Chạy lệnh: git add .
+Working dir : file2.txt
+Staging : file2.txt
+Repository : 
+
+e. Chạy lệnh: git commit -m"init project"
+Working dir : file2.txt
+Staging : 
+Repository : file2.txt
